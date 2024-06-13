@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  cinema_db:
+    image: postgres:16.3
+    volumes:
+      - ./petshop-app.sql:/docker-entrypoint-db.d/petshop.sql
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: petshop_db
+
+    ports:
+      - 5432:5432
