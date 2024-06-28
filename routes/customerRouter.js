@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
             return res.redirect("/customers/newcustomer");
         }
 
-        if (checkDuplicateCustomer(cpf)) {
+        if (await checkDuplicateCustomer(cpf)) {
             req.flash('error', 'Já existe um usuário cadastrado com este CPF.');
             return res.redirect("/customers/newcustomer");
         }
