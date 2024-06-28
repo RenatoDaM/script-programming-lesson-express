@@ -2,6 +2,8 @@ const express = require('express');
 const { Router } = express;
 const { Customer, Pet } = require('../database'); // Importando os modelos
 const router = Router();
+const {saveCustomer, savePet} = require('../service/customerService');
+const { validateCpf } = require('../util/cpfValidator');
 
 router.get("/customers", async (req, res) => {
     try {
@@ -19,30 +21,59 @@ router.get("/customers", async (req, res) => {
 });
 
 router.get("/newcustomer", (req, res) => {
-    res.render('new_customer', { title: 'Adicionar Novo Cliente e Pet' });
+    res.render('new_customer', { title: 'Add new Customer and his Pet' });
+});
+
+router.get("/newPet/:customerId", (req, res) => {
+    const customerId = req.params.customerId;
+    res.render('new_pet', { title: 'Add new Customer and his Pet', customerId: customerId });
 });
 
 router.post("/newcustomer", async (req, res) => {
     try {
         const { customerName, cpf, petName, petType } = req.body;
 
-        const newCustomer = await Customer.create({
-            name: customerName,
-            cpf: cpf,
-        });
+        if (customerName === '' || cpf === '' || petName === '' || petType === '') {
+            req.flash('error', 'Todos os campos são obrigatórios.');
+            return res.redirect("/sample_data/newcustomer");
+        } 
 
-        await Pet.create({
-            name: petName,
-            type: petType,
-            customerId: newCustomer.id,
-        });
+        if (!validateCpf(cpf)) {
+            req.flash('error', 'CPF inválido.');
+            return res.redirect("/sample_data/newcustomer");
+        }
+
+        await saveCustomer(customerName, cpf, petName, petType)
 
         req.flash('success', 'Novo cliente e pet adicionados!');
         res.redirect("/sample_data/customers");
+        
     } catch (error) {
         throw error;
     }
 });
+
+router.post("/:customerId/newpet", async (req, res) => {
+    try {
+        const customerId = req.params.customerId;
+        const { petName, petType } = req.body;
+
+        if (petName === '' || petType === '') {
+            req.flash('error', 'Todos os campos são obrigatórios.');
+            return res.redirect(`/sample_data/${customerId}/newpet`);
+        } 
+
+        await savePet(customerId, petName, petType);
+
+        req.flash('success', 'Novo cliente e pet adicionados!');
+        res.redirect("/sample_data/customers");
+        
+    } catch (error) {
+        throw error;
+    }
+});
+
+
 
 
 module.exports = router;

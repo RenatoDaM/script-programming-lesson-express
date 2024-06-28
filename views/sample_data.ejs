@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome do Cliente</th>
+                        <th>Customer name</th>
                         <th>CPF</th>
                         <th>Pets</th>
                         <th>Ações</th>
@@ -50,9 +50,10 @@
                                     <% } %>
                                 </ul>
                             </td>
+                            <td><a href="/sample_data/newPet/<%= customer.id %>" class="btn btn-primary">Add new Pet</a></td>
                         </tr>
                     <% }) %>
-                    <a href="/sample_data/newcustomer" class="btn btn-primary">Adicionar Novo Cliente e Pet</a>
+                    <a href="/sample_data/newcustomer" class="btn btn-primary">Add new Customer and his Pet</a>
                 </tbody>
             </table>
         </div>

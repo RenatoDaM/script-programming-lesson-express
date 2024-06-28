@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    flex: content;
+}
+
+h1 {
+    color: #28ff57;
+    text-align: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+.form-control {
+    border: 1px solid #28ff57;
+    border-radius: 4px;
+}
+
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.form-floating label {
+    color: #28ff57;
+}
+
+.btn-success {
+    background-color: #28ff57;
+    border-color: #28ff57;
+}
+
+.btn-success:hover {
+    background-color: #25e14d;
+    border-color: #25e14d;
+}
+
+.d-grid {
+    margin-top: 20px;
+}
+
+#dog-logo {
+    background-image: url("../images/logo.avif");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh;
+    width: 100%;
+}

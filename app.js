@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var favicon = require('serve-favicon');
 var session = require('express-session');
+const expressFlash = require('express-flash');
 
 var flash = require('connect-flash');
 
@@ -16,6 +17,8 @@ var newuserRouter = require('./routes/newuser')
 
 var app = express();
 
+app.use(favicon(__dirname + '/public/images/favicon.avif'));
+app.use(express.static(__dirname + '/public'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -34,6 +37,7 @@ app.use(session({
 }));
 
 app.use(flash());
+app.use(expressFlash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(243, 243, 243);
+}
+
+#dog-logo {
+    background-image: url("../images/logo.avif");
+    background-size: cover;
+    background-position: center;
+    height: 30vh;
+    width: auto;
+    border: 0px;
+    border-left: 5px;
+    border-left-color: black;
+    border-style: solid;
+}
+
+.container {
+    width: 22%;
+}
+
+#account {
+    border-radius: 10px;
+    color: black !important;
+    width: 100%;
+    background-color: white;
+    height: 5vh;
+    border: 0;
+    font-size: 30px;
+    border-bottom: 10px;
+    border-right: 5px;
+    border-left: 5px;
+    border-left-color: black;
+    border-right-color: rgb(233, 233, 233);
+    border-bottom-color: rgb(233, 233, 233);
+    border-style: solid;
+}
+
+.card-body {
+    border: 0px;
+    border-left: 5px;
+    border-left-color: black;
+    border-style: solid;
+}

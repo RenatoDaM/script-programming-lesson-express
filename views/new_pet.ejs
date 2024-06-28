@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/new_user_form.css" />
-    <title>Adicionar Cliente</title>
+    <title>Adicionar Cliente e seu Pet</title>
 </head>
 <body>
     <div class="container">
-        <h1>Add new Customer</h1>
+        <h1>Add new Customer and his Pet</h1>
         
         <% if (messages.error) { %>
             <div class="alert alert-danger">
@@ -16,15 +16,7 @@
             </div>
         <% } %>
         
-        <form method="post" action="/sample_data/newcustomer">
-            <div class="form-floating mb-4">
-                <input type="text" name="customerName" id="CustomerName" placeholder="Customer name" class="form-control">
-                <label for="CustomerName">Customer name</label>
-            </div>
-            <div class="form-floating mb-4">
-                <input type="text" name="cpf" id="Cpf" placeholder="CPF" class="form-control">
-                <label for="Cpf">CPF</label>
-            </div>
+        <form method="post" action="/sample_data/<%= customerId %>/newpet">
             <div class="form-floating mb-4">
                 <input type="text" name="petName" id="PetName" placeholder="Pet name" class="form-control">
                 <label for="PetName">Pet name</label>
