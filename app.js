@@ -10,9 +10,8 @@ const expressFlash = require('express-flash');
 var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var sampledataRouter = require('./routes/sample_data');
-var newuserRouter = require('./routes/newuser')
+var usersRouter = require('./routes/userRouter');
+var customersRouter = require('./routes/customerRouter');
 
 
 var app = express();
@@ -41,8 +40,7 @@ app.use(expressFlash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/sample_data', sampledataRouter);
-app.use('/newuser', newuserRouter);
+app.use('/customers', customersRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

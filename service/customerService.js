@@ -1,9 +1,11 @@
 const { Customer, Pet } = require('../database');
 
 async function saveCustomer(customerName, cpf, petName, petType) {
+    const sanitizedCpf = sanitizeCpf(cpf);
+
     const newCustomer = await Customer.create({
         name: customerName,
-        cpf: cpf,
+        cpf: sanitizedCpf,
     });
 
     await Pet.create({
@@ -13,6 +15,17 @@ async function saveCustomer(customerName, cpf, petName, petType) {
     });
 }
 
+async function checkDuplicateCustomer(cpf) {
+    const sanitizedCpf = sanitizeCpf(cpf);
+
+    const existingCustomer = await Customer.findOne({
+        where: {
+            cpf: sanitizedCpf,
+        },
+    });
+
+    return !!existingCustomer;
+}
 async function savePet(customerId, petName, petType) {
     try {
         const customer = await Customer.findByPk(customerId);
@@ -33,7 +46,12 @@ async function savePet(customerId, petName, petType) {
     }
 }
 
+function sanitizeCpf(cpf) {
+    return cpf.replace(/[.-]/g, '');
+}
+
 module.exports = {
     saveCustomer,
     savePet,
+    checkDuplicateCustomer,
 };
